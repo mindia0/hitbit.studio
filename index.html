@@ -70,7 +70,7 @@
         }
 
         .logo-native {
-            max-width: 450px; mix-blend-mode: screen; margin-bottom: 25px; pointer-events: none;
+            max-width: 450px; width: 100%; mix-blend-mode: screen; margin-bottom: 25px; pointer-events: none;
             animation: logoReveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
@@ -86,6 +86,22 @@
             font-size: 0.95rem; color: rgba(255, 255, 255, 0.5); letter-spacing: 2px; font-weight: 300; margin: 0;
             animation: subReveal 1s ease-out forwards; animation-delay: 1.2s; opacity: 0;
         }
+
+        .intro-video {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            display: block;
+            border-radius: 24px;
+            object-fit: cover;
+            outline: none;
+            background: transparent;
+            mix-blend-mode: screen;
+            opacity: 0.3; 
+            transition: opacity 0.5s ease; 
+        }
+
+        .intro-video:hover { opacity: 0.6; }
 
         .section-header { font-size: 2.8rem; font-weight: 200; margin-bottom: 50px; text-align: center; letter-spacing: 1px; }
         .section-header span {
@@ -149,7 +165,9 @@
 
         .showcase-section {
             background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 60px;
-            display: flex; align-items: center; justify-content: space-between; margin-bottom: 120px; flex-wrap: wrap; gap: 40px;
+            display: flex; align-items: center; justify-content: space-between; 
+            margin-bottom: 60px; /* Уменьшен отступ снизу с 120px до 60px */ 
+            flex-wrap: wrap; gap: 40px;
             backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
 
@@ -165,11 +183,56 @@
             margin: 0; background: linear-gradient(135deg, #c7a17a 0%, #ecd4b5 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 400;
         }
-        
-        .custom-audio { width: 100%; max-width: 450px; }
-        audio { width: 100%; filter: invert(90%) hue-rotate(180deg) drop-shadow(0 5px 15px rgba(0,0,0,0.5)); border-radius: 40px; }
 
-        .footer { text-align: center; padding: 80px 0 50px; border-top: 1px solid var(--glass-border); position: relative; }
+        .player-container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; }
+        .custom-audio audio { width: 100%; filter: invert(90%) hue-rotate(180deg) drop-shadow(0 5px 15px rgba(0,0,0,0.5)); border-radius: 40px; outline: none; }
+        
+        .playlist {
+            max-height: 220px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-right: 10px;
+        }
+        
+        .playlist::-webkit-scrollbar { width: 5px; }
+        .playlist::-webkit-scrollbar-thumb { background: rgba(199, 161, 122, 0.3); border-radius: 10px; }
+        .playlist::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        .track-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .track-btn::before {
+            content: '▶';
+            font-size: 0.7rem;
+            margin-right: 15px;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        .track-btn:hover { background: rgba(199, 161, 122, 0.1); color: var(--text-main); border-color: rgba(199, 161, 122, 0.3); }
+        .track-btn.active { background: rgba(199, 161, 122, 0.15); border-color: var(--accent); color: var(--accent); }
+        .track-btn.active::before { content: '🎶'; opacity: 1; }
+
+        .footer { 
+            text-align: center; 
+            padding: 40px 0 50px; /* Уменьшен отступ сверху с 80px до 40px */
+            border-top: 1px solid var(--glass-border); 
+            position: relative; 
+        }
         .contact-btn {
             display: inline-block; padding: 16px 45px; background: transparent; color: var(--text-main);
             border: 1px solid var(--accent); border-radius: 40px; text-decoration: none; font-size: 0.95rem;
@@ -179,7 +242,7 @@
 
         .licensing-block {
             max-width: 800px; margin: 0 auto 40px; padding: 35px; background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 16px; text-align: left; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 16px; text-align: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
         }
         .licensing-block h4 { margin: 0 0 15px 0; color: var(--text-main); font-weight: 400; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; }
         .licensing-block p { margin: 0 0 12px 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; font-weight: 300; }
@@ -187,9 +250,39 @@
         .copyright { color: rgba(255, 255, 255, 0.3); font-size: 0.85rem; margin: 0; letter-spacing: 2px; font-weight: 300; }
         
         @media (max-width: 768px) {
-            .lang-switch { position: relative; right: 0; margin-top: 10px; justify-content: center; }
             .navbar { flex-direction: column; padding: 15px 0; gap: 15px; }
-            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            .nav-links { gap: 15px; font-size: 0.75rem; flex-wrap: wrap; justify-content: center; padding: 0 10px; }
+            .lang-switch { position: relative; right: 0; margin-top: 5px; justify-content: center; }
+            .container { padding: 140px 15px 40px; }
+            .hero { padding: 20px 0 60px; }
+            .logo-native { max-width: 90%; margin-bottom: 20px; }
+            .hero h1 { font-size: 1rem; letter-spacing: 4px; animation-name: none; opacity: 1; }
+            .hero p.subtitle { font-size: 0.85rem; animation-name: none; opacity: 1; padding: 0 10px; line-height: 1.5; }
+            .section-header { font-size: 2rem; margin-bottom: 30px; }
+            .about-text { font-size: 1rem; margin-bottom: 60px; line-height: 1.8; text-align: left; padding: 0 10px; }
+            .intro-video { margin-bottom: 40px; border-radius: 16px; mix-blend-mode: screen; opacity: 0.3; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 60px; }
+            .card { padding: 25px 15px; border-radius: 16px; }
+            .card img { width: 80px; height: 80px; margin-bottom: 15px; }
+            .card h3 { font-size: 0.9rem; letter-spacing: 1px; }
+            .showcase-section { 
+                padding: 30px 20px; flex-direction: column; text-align: center; border-radius: 20px; 
+                margin-bottom: 30px; /* Для телефонов: уменьшено с 60px до 30px */
+                gap: 25px; 
+            }
+            .showcase-info h2 { font-size: 1.6rem; justify-content: center; flex-wrap: wrap; }
+            .player-container { max-width: 100%; }
+            .footer { 
+                padding: 30px 0 30px; /* Для телефонов: уменьшено с 50px до 30px */
+            }
+            .contact-btn { padding: 14px 35px; font-size: 0.85rem; margin-bottom: 40px; }
+            .licensing-block { padding: 25px 20px; margin: 0 0 30px 0; border-radius: 12px; }
+            .licensing-block h4 { font-size: 1rem; }
+            .licensing-block p { font-size: 0.85rem; line-height: 1.6; }
+        }
+        
+        @media (max-width: 480px) {
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -215,7 +308,7 @@
     <div class="container">
         
         <section class="hero" id="home">
-            <img src="logo-main.png" alt="HitBit Studio" class="logo-native">
+            <img src="logo-main.jpeg" alt="HitBit Studio" class="logo-native">
             <h1 data-i18n="hero_title">Curated Soundscapes</h1>
             <p class="subtitle" data-i18n="hero_subtitle">Soundtracking your life's moments. From deep focus to pure energy.</p>
         </section>
@@ -231,18 +324,18 @@
         <section id="projects">
             <h2 class="section-header"><span data-i18n="projects_h2_1" style="color:var(--text-main); -webkit-text-fill-color: var(--text-main); background: none;">Our</span> <span data-i18n="projects_h2_2">Divisions</span></h2>
             <div class="grid">
-                <a href="kids/index.html" class="card-link"><div class="card" style="--card-color: #81d4fa;"><img src="logo-kids.png" alt="Kids"><h3>HitBit Kids</h3></div></a>
-                <a href="classics/index.html" class="card-link"><div class="card" style="--card-color: #c7a17a;"><img src="logo-classics.png" alt="Classics"><h3>HitBit Classics</h3></div></a>
-                <a href="dance/index.html" class="card-link"><div class="card" style="--card-color: #e91e63;"><img src="logo-dance.png" alt="Dance"><h3>HitBit Dance</h3></div></a>
-                <a href="drive/index.html" class="card-link"><div class="card" style="--card-color: #00bcd4;"><img src="logo-drive.png" alt="Drive"><h3>HitBit Drive</h3></div></a>
-                <a href="lounge/index.html" class="card-link"><div class="card" style="--card-color: #9c27b0;"><img src="logo-lounge.png" alt="Lounge"><h3>HitBit Lounge</h3></div></a>
-                <a href="native/index.html" class="card-link"><div class="card" style="--card-color: #d84315;"><img src="logo-native.png" alt="Native"><h3>HitBit Native</h3></div></a>
-                <a href="nature/index.html" class="card-link"><div class="card" style="--card-color: #4caf50;"><img src="logo-nature.png" alt="Nature"><h3>HitBit Nature</h3></div></a>
-                <a href="pets/index.html" class="card-link"><div class="card" style="--card-color: #009688;"><img src="logo-pets.png" alt="Pets"><h3>HitBit Pets</h3></div></a>
-                <a href="school/index.html" class="card-link"><div class="card" style="--card-color: #ffc107;"><img src="logo-school.png" alt="School"><h3>HitBit School</h3></div></a>
-                <a href="work/index.html" class="card-link"><div class="card" style="--card-color: #4169e1;"><img src="logo-work.png" alt="Work"><h3>HitBit Work</h3></div></a>
-                <a href="sport/index.html" class="card-link"><div class="card" style="--card-color: #ff5722;"><img src="logo-sport.png" alt="Sport"><h3>HitBit Sport</h3></div></a>
-                <a href="vibes/index.html" class="card-link"><div class="card" style="--card-color: #3f51b5;"><img src="logo-vibes.png" alt="Vibes"><h3>HitBit Vibes</h3></div></a>
+                <a href="kids/index.html" class="card-link"><div class="card" style="--card-color: #81d4fa;"><img src="logo-kids.jpeg" alt="Kids"><h3>HitBit Kids</h3></div></a>
+                <a href="classics/index.html" class="card-link"><div class="card" style="--card-color: #c7a17a;"><img src="logo-classics.jpeg" alt="Classics"><h3>HitBit Classics</h3></div></a>
+                <a href="dance/index.html" class="card-link"><div class="card" style="--card-color: #e91e63;"><img src="logo-dance.jpeg" alt="Dance"><h3>HitBit Dance</h3></div></a>
+                <a href="drive/index.html" class="card-link"><div class="card" style="--card-color: #00bcd4;"><img src="logo-drive.jpeg" alt="Drive"><h3>HitBit Drive</h3></div></a>
+                <a href="lounge/index.html" class="card-link"><div class="card" style="--card-color: #9c27b0;"><img src="logo-lounge.jpeg" alt="Lounge"><h3>HitBit Lounge</h3></div></a>
+                <a href="native/index.html" class="card-link"><div class="card" style="--card-color: #d84315;"><img src="logo-native.jpeg" alt="Native"><h3>HitBit Native</h3></div></a>
+                <a href="nature/index.html" class="card-link"><div class="card" style="--card-color: #4caf50;"><img src="logo-nature.jpeg" alt="Nature"><h3>HitBit Nature</h3></div></a>
+                <a href="pets/index.html" class="card-link"><div class="card" style="--card-color: #009688;"><img src="logo-pets.jpeg" alt="Pets"><h3>HitBit Pets</h3></div></a>
+                <a href="school/index.html" class="card-link"><div class="card" style="--card-color: #ffc107;"><img src="logo-school.jpeg" alt="School"><h3>HitBit School</h3></div></a>
+                <a href="work/index.html" class="card-link"><div class="card" style="--card-color: #4169e1;"><img src="logo-work.jpeg" alt="Work"><h3>HitBit Work</h3></div></a>
+                <a href="sport/index.html" class="card-link"><div class="card" style="--card-color: #ff5722;"><img src="logo-sport.jpeg" alt="Sport"><h3>HitBit Sport</h3></div></a>
+                <a href="vibes/index.html" class="card-link"><div class="card" style="--card-color: #3f51b5;"><img src="logo-vibes.jpeg" alt="Vibes"><h3>HitBit Vibes</h3></div></a>
             </div>
         </section>
 
@@ -250,13 +343,30 @@
             <h2 class="section-header"><span data-i18n="showcase_h2_1" style="color:var(--text-main); -webkit-text-fill-color: var(--text-main); background: none;">Featured</span> <span data-i18n="showcase_h2_2">Sound</span></h2>
             <div class="showcase-section">
                 <div class="showcase-info">
-                    <h2>Midnight Highway <div class="visualizer"><span></span><span></span><span></span><span></span></div></h2>
-                    <p data-i18n="showcase_p">HitBit Drive Exclusive</p>
+                    <h2><span data-i18n="demo_label">Demo</span> <div class="visualizer"><span></span><span></span><span></span><span></span></div></h2>
+                    <p id="now-playing" data-i18n="track_1">Essence of Learning</p>
                 </div>
-                <div class="custom-audio">
-                    <audio controls controlsList="nodownload">
-                        <source src="track.mp3" type="audio/mpeg">
-                    </audio>
+                
+                <div class="player-container">
+                    <div class="custom-audio">
+                        <audio id="main-audio" controls controlsList="nodownload">
+                            <source src="Essence of Learning.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                    
+                    <div class="playlist">
+                        <button class="track-btn active" data-src="Essence of Learning.mp3" data-track="track_1" onclick="playTrack(this)"><span data-i18n="track_1">Essence of Learning</span></button>
+                        <button class="track-btn" data-src="Pulse Rush.mp3" data-track="track_2" onclick="playTrack(this)"><span data-i18n="track_2">Pulse Rush</span></button>
+                        <button class="track-btn" data-src="Deep Serenity.mp3" data-track="track_3" onclick="playTrack(this)"><span data-i18n="track_3">Deep Serenity</span></button>
+                        <button class="track-btn" data-src="Eternal Overture.mp3" data-track="track_4" onclick="playTrack(this)"><span data-i18n="track_4">Eternal Overture</span></button>
+                        <button class="track-btn" data-src="Midnight Groove.mp3" data-track="track_5" onclick="playTrack(this)"><span data-i18n="track_5">Midnight Groove</span></button>
+                        <button class="track-btn" data-src="Forest Whisper.mp3" data-track="track_6" onclick="playTrack(this)"><span data-i18n="track_6">Forest Whisper</span></button>
+                        <button class="track-btn" data-src="Focus Horizon.mp3" data-track="track_7" onclick="playTrack(this)"><span data-i18n="track_7">Focus Horizon</span></button>
+                        <button class="track-btn" data-src="Highway Dreams.mp3" data-track="track_8" onclick="playTrack(this)"><span data-i18n="track_8">Highway Dreams</span></button>
+                        <button class="track-btn" data-src="Sleepyhead.mp3" data-track="track_9" onclick="playTrack(this)"><span data-i18n="track_9">Sleepyhead</span></button>
+                        <button class="track-btn" data-src="Desert Spirit.mp3" data-track="track_10" onclick="playTrack(this)"><span data-i18n="track_10">Desert Spirit</span></button>
+                        <button class="track-btn" data-src="Lounge Avenue.mp3" data-track="track_11" onclick="playTrack(this)"><span data-i18n="track_11">Lounge Avenue</span></button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -264,6 +374,11 @@
         <footer class="footer" id="contact">
             <h2 class="section-header"><span data-i18n="contact_h2_1" style="color:var(--text-main); -webkit-text-fill-color: var(--text-main); background: none;">Contact</span> <span data-i18n="contact_h2_2">Us</span></h2>
             <a href="mailto:info@hitbit.studio" class="contact-btn" data-i18n="contact_btn">Get In Touch</a>
+
+            <video class="intro-video" controls playsinline>
+                <source src="intro.mp4" type="video/mp4">
+                Ваш браузер не поддерживает тег video.
+            </video>
 
             <div id="licensing" class="licensing-block">
                 <h4 data-i18n="lic_title">Copyright & Licensing Information</h4>
@@ -284,7 +399,11 @@
                 about_h2_1: "Sonic", about_h2_2: "Architecture",
                 about_p: "Welcome to <strong>HitBit Studio</strong>, an independent music label where sound meets purpose. We believe that music is not just meant to be heard—it is meant to be experienced. Our carefully curated divisions are tailored to provide the perfect sonic backdrop for every facet of modern life.<br><br>Whether you are seeking deep focus for intensive work, dynamic beats for an adrenaline-fueled workout, or gentle, comforting melodies to soothe a child to sleep, our global hub delivers unparalleled audio quality. We craft immersive soundscapes that elevate your daily routines into cinematic moments.",
                 projects_h2_1: "Our", projects_h2_2: "Divisions",
-                showcase_h2_1: "Featured", showcase_h2_2: "Sound", showcase_p: "HitBit Drive Exclusive",
+                showcase_h2_1: "Featured", showcase_h2_2: "Sound", 
+                demo_label: "Demo",
+                track_1: "Essence of Learning", track_2: "Pulse Rush", track_3: "Deep Serenity", track_4: "Eternal Overture",
+                track_5: "Midnight Groove", track_6: "Forest Whisper", track_7: "Focus Horizon", track_8: "Highway Dreams",
+                track_9: "Sleepyhead", track_10: "Desert Spirit", track_11: "Lounge Avenue",
                 contact_h2_1: "Contact", contact_h2_2: "Us", contact_btn: "Get In Touch",
                 lic_title: "Copyright & Licensing Information",
                 lic_p1: "All audio tracks, soundscapes, visual assets, and intellectual property featured on this website are exclusively owned and operated by HitBit Studio. These materials are protected under international copyright and intellectual property laws.",
@@ -298,7 +417,11 @@
                 about_h2_1: "Звуковая", about_h2_2: "Архитектура",
                 about_p: "Добро пожаловать в <strong>HitBit Studio</strong>, независимый музыкальный лейбл, где звук обретает смысл. Мы верим, что музыку нужно не просто слушать — её нужно проживать. Наши тщательно подобранные направления созданы, чтобы стать идеальным фоном для любой сферы современной жизни.<br><br>Ищете ли вы глубокую концентрацию для работы, динамичный ритм для тренировки или мягкую колыбельную для малыша — мы обеспечиваем безупречное качество звука. Мы создаем атмосферу, которая превращает повседневность в кино.",
                 projects_h2_1: "Наши", projects_h2_2: "Направления",
-                showcase_h2_1: "Избранное", showcase_h2_2: "Звучание", showcase_p: "Эксклюзив HitBit Drive",
+                showcase_h2_1: "Избранное", showcase_h2_2: "Звучание", 
+                demo_label: "Демо",
+                track_1: "Суть Познания", track_2: "Пульс Ритма", track_3: "Глубокая Безмятежность", track_4: "Вечная Увертюра",
+                track_5: "Полуночный Грув", track_6: "Шепот Леса", track_7: "Горизонт Фокуса", track_8: "Сны на Шоссе",
+                track_9: "Соня", track_10: "Дух Пустыни", track_11: "Лаунж Авеню",
                 contact_h2_1: "Связаться", contact_h2_2: "С нами", contact_btn: "Написать нам",
                 lic_title: "Авторские права и лицензирование",
                 lic_p1: "Все аудиотреки, звуковые ландшафты, визуальные материалы и интеллектуальная собственность на этом сайте принадлежат исключительно HitBit Studio. Данные материалы защищены международными законами об авторском праве.",
@@ -316,6 +439,34 @@
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
         }
+
+        function playTrack(btnElement) {
+            const audio = document.getElementById('main-audio');
+            const nowPlaying = document.getElementById('now-playing');
+            
+            document.querySelectorAll('.track-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            audio.src = btnElement.getAttribute('data-src');
+            audio.play();
+            
+            const trackKey = btnElement.getAttribute('data-track');
+            nowPlaying.setAttribute('data-i18n', trackKey);
+            
+            const currentLang = document.querySelector('.lang-btn.active').id.replace('btn-', '');
+            nowPlaying.innerHTML = translations[currentLang][trackKey];
+        }
+
+        const hoverSound = new Audio('hover.mp3'); 
+        hoverSound.volume = 0.3; 
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0; 
+                hoverSound.play().catch(error => { });
+            });
+        });
 
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');

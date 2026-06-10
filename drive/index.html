@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HitBit Studio | HitBit Pets</title>
+    <title>HitBit Studio | HitBit Drive</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pets-color: #00cec9; /* Жизнерадостный бирюзовый цвет для питомцев */
+            --drive-color: #00d2ff; /* Динамичный неоново-синий/голубой для Drive */
             --glass-bg: rgba(20, 22, 35, 0.4); 
             --glass-border: rgba(255, 255, 255, 0.06);
             --text-main: #f8f9fa;
             --text-muted: #b4bacc;
         }
 
-        body { margin: 0; background: linear-gradient(135deg, #090a0f 0%, #0d0914 100%); color: var(--text-main); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        body { margin: 0; background: linear-gradient(135deg, #090a0f 0%, #080c14 100%); color: var(--text-main); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
         
         /* ВЕРХНЯЯ ПАНЕЛЬ С КНОПКОЙ НАЗАД И ПЕРЕКЛЮЧАТЕЛЕМ ЯЗЫКА */
@@ -25,34 +25,35 @@
             z-index: 1000;
         }
 
-        .back-link { color: var(--pets-color); text-decoration: none; text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; transition: 0.3s; }
-        .back-link:hover { text-shadow: 0 0 10px rgba(0, 206, 201, 0.5); }
+        .back-link { color: var(--drive-color); text-decoration: none; text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; transition: 0.3s; }
+        .back-link:hover { text-shadow: 0 0 10px rgba(0, 210, 255, 0.5); }
 
         .lang-switch { display: flex; gap: 10px; align-items: center; }
         .lang-btn { background: none; border: none; color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; padding: 0; transition: 0.3s; }
         .lang-btn:hover { color: var(--text-main); }
-        .lang-btn.active { color: var(--pets-color); font-weight: 500; }
+        .lang-btn.active { color: var(--drive-color); font-weight: 500; }
         .lang-divider { color: var(--glass-border); font-size: 0.8rem; }
 
         .container { max-width: 900px; margin: 0 auto; padding: 120px 20px 60px; text-align: center; }
         
-        /* Круглая эмблема */
+        /* Круглая эмблема с защитой от сплющивания */
         .project-logo { 
             width: 160px; height: 160px; border-radius: 50%; 
-            margin-bottom: 25px; border: 2px solid rgba(0, 206, 201, 0.3);
+            margin-bottom: 25px; border: 2px solid rgba(0, 210, 255, 0.3);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.8);
             background: #0a0a0c; object-fit: cover;
+            aspect-ratio: 1 / 1; /* Гарантирует идеальный круг */
         }
 
         .header-section { margin-bottom: 50px; }
         .header-section h1 { font-size: 3rem; font-weight: 200; margin: 0; letter-spacing: 2px; }
-        .header-section p { color: var(--pets-color); font-size: 1rem; margin-top: 15px; font-weight: 400; text-transform: uppercase; letter-spacing: 4px; }
+        .header-section p { color: var(--drive-color); font-size: 1rem; margin-top: 15px; font-weight: 400; text-transform: uppercase; letter-spacing: 4px; }
 
-        /* БЛОК ВИЗИТКИ (МАНИФЕСТ) - ПО ЦЕНТРУ */
+        /* БЛОК ВИЗИТКИ (МАНИФЕСТ) */
         .manifesto-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-top: 4px solid var(--pets-color); 
+            border-top: 4px solid var(--drive-color); 
             border-radius: 24px;
             padding: 60px;
             margin-top: 20px;
@@ -65,8 +66,8 @@
         }
 
         .manifesto-card:hover {
-            border-color: rgba(0, 206, 201, 0.4);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(0, 206, 201, 0.15);
+            border-color: rgba(0, 210, 255, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(0, 210, 255, 0.15);
         }
 
         .manifesto-title { font-size: 2.2rem; font-weight: 300; margin: 0 0 25px 0; color: var(--text-main); letter-spacing: 1px; }
@@ -77,15 +78,15 @@
         }
         .manifesto-text strong { color: var(--text-main); font-weight: 400; }
 
-        /* Хэштеги по центру */
+        /* Хэштеги */
         .tags-container { 
             display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; 
             margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 35px; 
         }
         .tag {
-            background: rgba(0, 206, 201, 0.05);
-            border: 1px solid rgba(0, 206, 201, 0.2);
-            color: var(--pets-color);
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            color: var(--drive-color);
             padding: 10px 25px;
             border-radius: 30px;
             font-size: 0.85rem;
@@ -93,7 +94,7 @@
             letter-spacing: 2px;
             transition: 0.3s;
         }
-        .tag:hover { background: rgba(0, 206, 201, 0.15); border-color: var(--pets-color); transform: translateY(-2px); }
+        .tag:hover { background: rgba(0, 210, 255, 0.15); border-color: var(--drive-color); transform: translateY(-2px); }
 
         @media (max-width: 768px) {
             .top-bar { padding: 20px; flex-direction: column; gap: 15px; }
@@ -103,9 +104,9 @@
             .manifesto-text { font-size: 1rem; }
         }
 
-        .cta-box { margin-top: 80px; padding: 50px; border: 1px solid var(--pets-color); border-radius: 30px; background: rgba(0, 206, 201, 0.03); }
-        .cta-btn { display: inline-block; margin-top: 20px; padding: 15px 40px; background: var(--pets-color); color: #000; text-decoration: none; border-radius: 30px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; transition: 0.3s; }
-        .cta-btn:hover { box-shadow: 0 0 20px rgba(0, 206, 201, 0.5); transform: translateY(-2px); }
+        .cta-box { margin-top: 80px; padding: 50px; border: 1px solid var(--drive-color); border-radius: 30px; background: rgba(0, 210, 255, 0.03); }
+        .cta-btn { display: inline-block; margin-top: 20px; padding: 15px 40px; background: var(--drive-color); color: #000; text-decoration: none; border-radius: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; transition: 0.3s; }
+        .cta-btn:hover { box-shadow: 0 0 20px rgba(0, 210, 255, 0.5); transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -123,33 +124,33 @@
     <div class="container">
         
         <div class="header-section">
-            <img src="logo-pets.jpeg" alt="HitBit Pets Logo" class="project-logo" onerror="this.src='../logo-main.jpeg'">
-            <h1>HitBit Pets</h1>
-            <p data-i18n="subtitle">Audio & Music for Our Furry Friends</p>
+            <img src="logo-drive.jpeg" alt="HitBit Drive Logo" class="project-logo" onerror="this.src='../logo-main.jpeg'">
+            <h1>HitBit Drive</h1>
+            <p data-i18n="subtitle">High-Octane Automotive & Racing Beats</p>
         </div>
 
         <div class="manifesto-card">
-            <h2 class="manifesto-title" data-i18n="man_title">Harmonies for Happy Tails</h2>
+            <h2 class="manifesto-title" data-i18n="man_title">Fuel Your Journey</h2>
             <p class="manifesto-text" data-i18n="man_p1">
-                <strong>HitBit Pets</strong> is a specialized audio division dedicated to the well-being and entertainment of our beloved animal companions. We create soothing soundscapes designed to reduce pet anxiety, alongside joyful, playful rhythms that keep them active and engaged.
+                <strong>HitBit Drive</strong> is the ultimate sonic engine for automotive content, racing games, and adrenaline-fueled projects. We deliver high-energy electronic, rock, and synthwave tracks designed to push the limits of speed.
             </p>
             <p class="manifesto-text" data-i18n="man_p2">
-                From calming frequencies that comfort dogs during thunderstorms to relaxing ambient purrs for cats, our audio environments are carefully tailored to the unique hearing ranges of animals. Give your pets the gift of a relaxed, happy, and stress-free life through sound.
+                From heavy bass drops and aggressive guitar riffs to pulsing synthetic rhythms, our catalog ensures your audience feels every turn and straightaway. Perfect for car reviews, motorsport highlights, and action sequences.
             </p>
 
             <div class="tags-container">
-                <span class="tag">#PetMusic</span>
-                <span class="tag">#CalmingAudio</span>
-                <span class="tag">#HappyPets</span>
-                <span class="tag">#AnimalWellness</span>
-                <span class="tag">#PetCare</span>
+                <span class="tag">#Automotive</span>
+                <span class="tag">#RacingMusic</span>
+                <span class="tag">#HighOctane</span>
+                <span class="tag">#Synthwave</span>
+                <span class="tag">#ActionBeats</span>
             </div>
         </div>
 
         <div class="cta-box">
-            <h2 data-i18n="cta_title">Pet Industry Licensing</h2>
-            <p data-i18n="cta_desc">Looking for specialized background audio for your veterinary clinic, pet cafe, or animal wellness app?</p>
-            <a href="mailto:info@hitbit.studio?subject=HitBit%20Pets%20Licensing" class="cta-btn" data-i18n="cta_btn">Acquire License</a>
+            <h2 data-i18n="cta_title">Automotive & Action Licensing</h2>
+            <p data-i18n="cta_desc">Need high-octane tracks for your car vlog, racing game, or extreme sports video?</p>
+            <a href="mailto:info@hitbit.studio?subject=HitBit%20Drive%20Licensing" class="cta-btn" data-i18n="cta_btn">Acquire License</a>
         </div>
     </div>
 
@@ -158,22 +159,22 @@
         const translations = {
             en: {
                 back: "← Back to Home",
-                subtitle: "Audio & Music for Our Furry Friends",
-                man_title: "Harmonies for Happy Tails",
-                man_p1: "<strong>HitBit Pets</strong> is a specialized audio division dedicated to the well-being and entertainment of our beloved animal companions. We create soothing soundscapes designed to reduce pet anxiety, alongside joyful, playful rhythms that keep them active and engaged.",
-                man_p2: "From calming frequencies that comfort dogs during thunderstorms to relaxing ambient purrs for cats, our audio environments are carefully tailored to the unique hearing ranges of animals. Give your pets the gift of a relaxed, happy, and stress-free life through sound.",
-                cta_title: "Pet Industry Licensing",
-                cta_desc: "Looking for specialized background audio for your veterinary clinic, pet cafe, or animal wellness app?",
+                subtitle: "High-Octane Automotive & Racing Beats",
+                man_title: "Fuel Your Journey",
+                man_p1: "<strong>HitBit Drive</strong> is the ultimate sonic engine for automotive content, racing games, and adrenaline-fueled projects. We deliver high-energy electronic, rock, and synthwave tracks designed to push the limits of speed.",
+                man_p2: "From heavy bass drops and aggressive guitar riffs to pulsing synthetic rhythms, our catalog ensures your audience feels every turn and straightaway. Perfect for car reviews, motorsport highlights, and action sequences.",
+                cta_title: "Automotive & Action Licensing",
+                cta_desc: "Need high-octane tracks for your car vlog, racing game, or extreme sports video?",
                 cta_btn: "Acquire License"
             },
             ru: {
                 back: "← На главную",
-                subtitle: "Аудио и музыка для наших пушистых друзей",
-                man_title: "Гармония для Счастливых Хвостиков",
-                man_p1: "<strong>HitBit Pets</strong> — это специализированное аудионаправление, посвященное благополучию и развлечению наших любимых домашних питомцев. Мы создаем успокаивающие звуковые ландшафты для снижения тревожности у животных, а также веселые ритмы для их активности и игр.",
-                man_p2: "Будь то расслабляющие частоты, успокаивающие собак во время грозы, или мягкий эмбиент для кошек, наши аудиосреды тщательно адаптированы к уникальному слуховому восприятию животных. Подарите своим питомцам спокойную и радостную жизнь без стресса с помощью правильного звука.",
-                cta_title: "Лицензирование для зообизнеса",
-                cta_desc: "Ищете специализированный звуковой фон для ветеринарной клиники, зоокафе или приложения для животных?",
+                subtitle: "Драйвовая музыка для авто и гонок",
+                man_title: "Энергия Твоего Движения",
+                man_p1: "<strong>HitBit Drive</strong> — это мощный звуковой двигатель для автомобильного контента, гоночных игр и адреналиновых проектов. Мы создаем энергичную электронную, рок и синтвейв музыку, чтобы раздвигать границы скорости.",
+                man_p2: "От мощных басовых дропов и агрессивных гитарных риффов до пульсирующих синтетических ритмов — наш каталог гарантирует, что аудитория прочувствует каждый поворот и прямую. Идеально для автообзоров, автоспорта и экшен-сцен.",
+                cta_title: "Лицензирование для авто и экшена",
+                cta_desc: "Нужны драйвовые треки для вашего автоблога, гоночной игры или видео об экстремальном спорте?",
                 cta_btn: "Получить лицензию"
             }
         };
@@ -190,13 +191,13 @@
             document.getElementById('btn-' + lang).classList.add('active');
         }
 
-        // КОСМИЧЕСКИЕ ЧАСТИЦЫ
+        // КОСМИЧЕСКИЕ ЧАСТИЦЫ (АДАПТИРОВАНЫ ПОД DRIVE)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
         
-        // Цвета частиц: радостные и свежие бирюзово-мятные оттенки
-        const colors = ['rgba(0, 206, 201, ', 'rgba(129, 236, 236, ', 'rgba(255, 255, 255, '];
+        // Цвета частиц: оттенки неоново-синего, голубого и циана
+        const colors = ['rgba(0, 210, 255, ', 'rgba(0, 150, 255, ', 'rgba(0, 255, 200, '];
         
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize); resize();
@@ -205,9 +206,8 @@
             constructor() {
                 this.x = Math.random() * width; this.y = Math.random() * height;
                 this.radius = Math.random() * 8 + 2; 
-                // Движение легкое и игривое
-                this.vx = (Math.random() - 0.5) * 0.4; 
-                this.vy = (Math.random() - 0.5) * 0.4;
+                this.vx = (Math.random() - 0.5) * 0.8; // Чуть быстрее для Drive
+                this.vy = (Math.random() - 0.5) * 0.8;
                 this.color = colors[Math.floor(Math.random() * colors.length)] + (Math.random() * 0.3 + 0.1) + ')';
             }
             draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.shadowBlur = this.radius * 2; ctx.shadowColor = this.color; ctx.fill(); }
