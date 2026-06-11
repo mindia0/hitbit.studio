@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HitBit Studio | Global Music Hub</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23000000'/><text x='50' y='54' fill='%23ffffff' font-family='sans-serif' font-size='42' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>HB</text></svg>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23000000'/><text x='50' y='54' fill='%23ffffff' font-family='sans-serif' font-size='42' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>HB</text></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -131,15 +135,15 @@
         .card-link:nth-child(1) .card { animation-delay: 0.1s; } .card-link:nth-child(2) .card { animation-delay: 0.2s; }
         .card-link:nth-child(3) .card { animation-delay: 0.3s; } .card-link:nth-child(4) .card { animation-delay: 0.4s; }
         .card-link:nth-child(5) .card { animation-delay: 0.5s; } .card-link:nth-child(6) .card { animation-delay: 0.6s; }
-        .card-link:nth-child(7) .card { animation-delay: 0.7s; } .card-link:nth-child(8) .card { animation-delay: 0.8s; }
-        .card-link:nth-child(9) .card { animation-delay: 0.9s; } .card-link:nth-child(10) .card { animation-delay: 1.0s; }
-        .card-link:nth-child(11) .card { animation-delay: 1.1s; } .card-link:nth-child(12) .card { animation-delay: 1.2s; }
+        .card-link:nth-child(7) .card { animation-delay: 0.7s; } .card-link:nth-child(8) .card { animation-delay: 0.7s; }
+        .card-link:nth-child(9) .card { animation-delay: 0.7s; } .card-link:nth-child(10) .card { animation-delay: 0.7s; }
+        .card-link:nth-child(11) .card { animation-delay: 0.7s; } .card-link:nth-child(12) .card { animation-delay: 0.7s; }
 
         .card:hover {
             transform: translateY(-10px) !important;
             background: rgba(255, 255, 255, 0.04);
-            border-color: var(--card-color);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px var(--card-color);
+            border-color: var(--accent); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px var(--accent); 
         }
 
         .card img {
@@ -151,8 +155,8 @@
 
         .card:hover img {
             transform: scale(1.08) rotate(5deg);
-            border-color: var(--card-color);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.8), 0 0 30px var(--card-color);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.8), 0 0 30px var(--accent);
             filter: grayscale(0%) opacity(1);
         }
 
@@ -161,16 +165,17 @@
             text-transform: uppercase; color: var(--text-muted); transition: color 0.4s ease, text-shadow 0.4s ease;
         }
         
-        .card:hover h3 { color: var(--card-color); text-shadow: 0 0 10px var(--card-color); }
+        .card:hover h3 { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 
         .showcase-section {
             background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 60px;
-            display: flex; align-items: center; justify-content: space-between; 
-            margin-bottom: 60px; /* Уменьшен отступ снизу с 120px до 60px */ 
-            flex-wrap: wrap; gap: 40px;
+            display: flex; align-items: flex-start; justify-content: space-between; 
+            margin-bottom: 60px; flex-wrap: wrap; gap: 50px;
             backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
 
+        /* Навигация витрины (текст и пульты) */
+        .showcase-info { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 300px; }
         .showcase-info h2 { margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 200; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; }
 
         .visualizer { display: flex; align-items: flex-end; gap: 4px; height: 24px; }
@@ -180,15 +185,119 @@
         @keyframes bounce { 0% { height: 20%; } 100% { height: 100%; } }
         
         .showcase-info p { 
-            margin: 0; background: linear-gradient(135deg, #c7a17a 0%, #ecd4b5 100%);
+            margin: 0 0 35px 0; background: linear-gradient(135deg, #c7a17a 0%, #ecd4b5 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 400;
         }
 
-        .player-container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; }
+        /* --- DJ КОНСОЛЬ (ПЛАСТИНКА И ДРАМ-МАШИНА) --- */
+        .dj-console {
+            display: flex; align-items: center; gap: 30px; background: rgba(0,0,0,0.2); 
+            padding: 30px; border-radius: 24px; border: 1px solid var(--glass-border);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5); width: 100%; box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Прокачанная Пластинка */
+        .vinyl-container {
+            position: relative; width: 220px; height: 220px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            user-select: none; -webkit-user-select: none;
+        }
+        .vinyl-disk {
+            width: 100%; height: 100%; border-radius: 50%;
+            /* ДОБАВЛЕНО ИЗОБРАЖЕНИЕ: Укажите путь к вашей картинке винила */
+            background-image: url('vinyl-record.png'); 
+            background-size: cover;
+            background-position: center;
+            background-color: #111; /* Резервный фон, если картинки еще нет */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 30px rgba(199, 161, 122, 0.15);
+            position: relative; cursor: grab; touch-action: none;
+            transform-origin: center center; will-change: transform;
+        }
+        .vinyl-disk:active { cursor: grabbing; }
+        
+        /* Глянец поверх картинки (опционально) */
+        .vinyl-disk::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%; background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.06) 55%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        /* Центр (Яблоко винила). Если на вашей картинке уже есть красивый центр, этот блок можно скрыть (display: none;) */
+        .vinyl-center {
+            position: absolute; width: 70px; height: 70px; background: #12131a;
+            border-radius: 50%; border: 3px solid var(--accent); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(199, 161, 122, 0.5), inset 0 0 15px rgba(0,0,0,0.8);
+            pointer-events: none; 
+        }
+        /* Текст на яблоке (лого) */
+        .vinyl-center::before {
+            content: 'HB'; font-weight: 600; color: var(--accent); font-size: 1.4rem; letter-spacing: -1px;
+        }
+        /* Шпиндель */
+        .vinyl-center::after {
+            content: ''; position: absolute; width: 8px; height: 8px; background: #090a0f; border-radius: 50%;
+            box-shadow: inset 0 2px 2px rgba(255,255,255,0.2);
+        }
+
+        /* Тонарм (Needle) */
+        .tonearm {
+            position: absolute; top: -10px; right: -15px; width: 120px; height: 10px;
+            background: #222; border-radius: 5px; transform-origin: 90% 50%;
+            transform: rotate(60deg); /* Поднят по умолчанию */
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5); z-index: 2; pointer-events: none;
+            border: 1px solid #333;
+        }
+        /* Головка звукоснимателя */
+        .tonearm::before {
+            content: ''; position: absolute; left: 0; top: -5px; width: 25px; height: 20px;
+            background: #111; border-radius: 3px; border: 1px solid var(--accent);
+            box-shadow: 0 0 10px rgba(199, 161, 122, 0.3);
+        }
+        /* Игла */
+        .tonearm::after {
+            content: ''; position: absolute; left: 5px; top: 15px; width: 2px; height: 8px;
+            background: #aaa; border-radius: 1px;
+        }
+        /* Состояние: когда тонарм опущен */
+        .vinyl-container.playing .tonearm { transform: rotate(15deg); }
+
+
+        /* Драм-машина (Pads) */
+        .drum-machine {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;
+            flex-grow: 1; user-select: none; -webkit-user-select: none;
+        }
+        .pad {
+            aspect-ratio: 1; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 12px;
+            cursor: pointer; position: relative;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            display: flex; align-items: flex-end; justify-content: flex-start; padding: 10px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+        /* Название звука */
+        .pad::after {
+            content: attr(data-sound); color: rgba(255,255,255,0.3);
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 300;
+        }
+        /* Эффект нажатия (свечение) */
+        .pad:active, .pad.hit {
+            background: rgba(199, 161, 122, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent), inset 0 0 10px rgba(199, 161, 122, 0.5);
+            transform: scale(0.96);
+        }
+        .pad:active::after, .pad.hit::after { color: var(--accent); }
+        /* ---------------------------------- */
+
+        .player-container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0; }
         .custom-audio audio { width: 100%; filter: invert(90%) hue-rotate(180deg) drop-shadow(0 5px 15px rgba(0,0,0,0.5)); border-radius: 40px; outline: none; }
         
         .playlist {
-            max-height: 220px;
+            max-height: 280px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -229,7 +338,7 @@
 
         .footer { 
             text-align: center; 
-            padding: 40px 0 50px; /* Уменьшен отступ сверху с 80px до 40px */
+            padding: 40px 0 50px; 
             border-top: 1px solid var(--glass-border); 
             position: relative; 
         }
@@ -249,6 +358,15 @@
         .licensing-block p:last-child { margin-bottom: 0; }
         .copyright { color: rgba(255, 255, 255, 0.3); font-size: 0.85rem; margin: 0; letter-spacing: 2px; font-weight: 300; }
         
+        /* --- ОБНОВЛЕННЫЙ АДАПТИВ ДЛЯ DJ ПУЛЬТА И МОБИЛЬНЫХ УСТРОЙСТВ --- */
+        @media (max-width: 1024px) {
+            .showcase-section { flex-direction: column; align-items: center; padding: 40px 20px; }
+            .showcase-info, .player-container { width: 100%; max-width: 600px; text-align: center; align-items: center; }
+            .dj-console { flex-direction: column; gap: 30px; padding: 25px; align-items: center; justify-content: center; }
+            .drum-machine { width: 100%; max-width: 380px; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+            .tonearm { right: 10px; top: -5px; width: 100px; }
+        }
+
         @media (max-width: 768px) {
             .navbar { flex-direction: column; padding: 15px 0; gap: 15px; }
             .nav-links { gap: 15px; font-size: 0.75rem; flex-wrap: wrap; justify-content: center; padding: 0 10px; }
@@ -259,22 +377,18 @@
             .hero h1 { font-size: 1rem; letter-spacing: 4px; animation-name: none; opacity: 1; }
             .hero p.subtitle { font-size: 0.85rem; animation-name: none; opacity: 1; padding: 0 10px; line-height: 1.5; }
             .section-header { font-size: 2rem; margin-bottom: 30px; }
-            .about-text { font-size: 1rem; margin-bottom: 60px; line-height: 1.8; text-align: left; padding: 0 10px; }
+            .about-text { font-size: 1rem; margin-bottom: 60px; line-height: 1.8; text-align: center; padding: 0 10px; }
             .intro-video { margin-bottom: 40px; border-radius: 16px; mix-blend-mode: screen; opacity: 0.3; }
             .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 60px; }
             .card { padding: 25px 15px; border-radius: 16px; }
             .card img { width: 80px; height: 80px; margin-bottom: 15px; }
             .card h3 { font-size: 0.9rem; letter-spacing: 1px; }
-            .showcase-section { 
-                padding: 30px 20px; flex-direction: column; text-align: center; border-radius: 20px; 
-                margin-bottom: 30px; /* Для телефонов: уменьшено с 60px до 30px */
-                gap: 25px; 
-            }
-            .showcase-info h2 { font-size: 1.6rem; justify-content: center; flex-wrap: wrap; }
-            .player-container { max-width: 100%; }
-            .footer { 
-                padding: 30px 0 30px; /* Для телефонов: уменьшено с 50px до 30px */
-            }
+            
+            /* Корректировка винила для планшетов */
+            .vinyl-container { width: 200px; height: 200px; }
+            .vinyl-center { width: 60px; height: 60px; }
+            
+            .footer { padding: 30px 0 30px; }
             .contact-btn { padding: 14px 35px; font-size: 0.85rem; margin-bottom: 40px; }
             .licensing-block { padding: 25px 20px; margin: 0 0 30px 0; border-radius: 12px; }
             .licensing-block h4 { font-size: 1rem; }
@@ -283,6 +397,22 @@
         
         @media (max-width: 480px) {
             .grid { grid-template-columns: 1fr; }
+            
+            /* Полная адаптация консоли под маленькие экраны (iPhone и др.) */
+            .vinyl-container { width: 170px; height: 170px; margin-bottom: 10px; }
+            .vinyl-center { width: 50px; height: 50px; }
+            .vinyl-center::before { font-size: 1rem; }
+            
+            /* Тонарм теперь не исчезает, а аккуратно подстраивается */
+            .tonearm { display: block; width: 80px; right: -5px; top: -12px; }
+            .tonearm::before { width: 20px; height: 16px; }
+            
+            /* Драм-машина: компактная сетка 4 в ряд */
+            .drum-machine { width: 100%; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+            .pad { padding: 5px; border-radius: 8px; }
+            .pad::after { font-size: 0.55rem; }
+            
+            .dj-console { padding: 15px; gap: 20px; }
         }
     </style>
 </head>
@@ -323,28 +453,50 @@
 
         <section id="projects">
             <h2 class="section-header"><span data-i18n="projects_h2_1" style="color:var(--text-main); -webkit-text-fill-color: var(--text-main); background: none;">Our</span> <span data-i18n="projects_h2_2">Divisions</span></h2>
+            
             <div class="grid">
-                <a href="kids/index.html" class="card-link"><div class="card" style="--card-color: #81d4fa;"><img src="logo-kids.jpeg" alt="Kids"><h3>HitBit Kids</h3></div></a>
-                <a href="classics/index.html" class="card-link"><div class="card" style="--card-color: #c7a17a;"><img src="logo-classics.jpeg" alt="Classics"><h3>HitBit Classics</h3></div></a>
-                <a href="dance/index.html" class="card-link"><div class="card" style="--card-color: #e91e63;"><img src="logo-dance.jpeg" alt="Dance"><h3>HitBit Dance</h3></div></a>
-                <a href="drive/index.html" class="card-link"><div class="card" style="--card-color: #00bcd4;"><img src="logo-drive.jpeg" alt="Drive"><h3>HitBit Drive</h3></div></a>
-                <a href="lounge/index.html" class="card-link"><div class="card" style="--card-color: #9c27b0;"><img src="logo-lounge.jpeg" alt="Lounge"><h3>HitBit Lounge</h3></div></a>
-                <a href="native/index.html" class="card-link"><div class="card" style="--card-color: #d84315;"><img src="logo-native.jpeg" alt="Native"><h3>HitBit Native</h3></div></a>
-                <a href="nature/index.html" class="card-link"><div class="card" style="--card-color: #4caf50;"><img src="logo-nature.jpeg" alt="Nature"><h3>HitBit Nature</h3></div></a>
-                <a href="pets/index.html" class="card-link"><div class="card" style="--card-color: #009688;"><img src="logo-pets.jpeg" alt="Pets"><h3>HitBit Pets</h3></div></a>
-                <a href="school/index.html" class="card-link"><div class="card" style="--card-color: #ffc107;"><img src="logo-school.jpeg" alt="School"><h3>HitBit School</h3></div></a>
-                <a href="work/index.html" class="card-link"><div class="card" style="--card-color: #4169e1;"><img src="logo-work.jpeg" alt="Work"><h3>HitBit Work</h3></div></a>
-                <a href="sport/index.html" class="card-link"><div class="card" style="--card-color: #ff5722;"><img src="logo-sport.jpeg" alt="Sport"><h3>HitBit Sport</h3></div></a>
-                <a href="vibes/index.html" class="card-link"><div class="card" style="--card-color: #3f51b5;"><img src="logo-vibes.jpeg" alt="Vibes"><h3>HitBit Vibes</h3></div></a>
+                <a href="kids/index.html" class="card-link"><div class="card"><img src="logo-kids.jpeg" alt="Kids"><h3>HitBit Kids</h3></div></a>
+                <a href="classics/index.html" class="card-link"><div class="card"><img src="logo-classics.jpeg" alt="Classics"><h3>HitBit Classics</h3></div></a>
+                <a href="dance/index.html" class="card-link"><div class="card"><img src="logo-dance.jpeg" alt="Dance"><h3>HitBit Dance</h3></div></a>
+                <a href="drive/index.html" class="card-link"><div class="card"><img src="logo-drive.jpeg" alt="Drive"><h3>HitBit Drive</h3></div></a>
+                <a href="lounge/index.html" class="card-link"><div class="card"><img src="logo-lounge.jpeg" alt="Lounge"><h3>HitBit Lounge</h3></div></a>
+                <a href="native/index.html" class="card-link"><div class="card"><img src="logo-native.jpeg" alt="Native"><h3>HitBit Native</h3></div></a>
+                <a href="nature/index.html" class="card-link"><div class="card"><img src="logo-nature.jpeg" alt="Nature"><h3>HitBit Nature</h3></div></a>
+                <a href="pets/index.html" class="card-link"><div class="card"><img src="logo-pets.jpeg" alt="Pets"><h3>HitBit Pets</h3></div></a>
+                <a href="school/index.html" class="card-link"><div class="card"><img src="logo-school.jpeg" alt="School"><h3>HitBit School</h3></div></a>
+                <a href="work/index.html" class="card-link"><div class="card"><img src="logo-work.jpeg" alt="Work"><h3>HitBit Work</h3></div></a>
+                <a href="sport/index.html" class="card-link"><div class="card"><img src="logo-sport.jpeg" alt="Sport"><h3>HitBit Sport</h3></div></a>
+                <a href="vibes/index.html" class="card-link"><div class="card"><img src="logo-vibes.jpeg" alt="Vibes"><h3>HitBit Vibes</h3></div></a>
             </div>
         </section>
 
         <section id="showcase">
             <h2 class="section-header"><span data-i18n="showcase_h2_1" style="color:var(--text-main); -webkit-text-fill-color: var(--text-main); background: none;">Featured</span> <span data-i18n="showcase_h2_2">Sound</span></h2>
             <div class="showcase-section">
+                
                 <div class="showcase-info">
                     <h2><span data-i18n="demo_label">Demo</span> <div class="visualizer"><span></span><span></span><span></span><span></span></div></h2>
                     <p id="now-playing" data-i18n="track_1">Essence of Learning</p>
+                    
+                    <div class="dj-console">
+                        <div class="vinyl-container" id="vinyl-container">
+                            <div class="tonearm"></div>
+                            <div class="vinyl-disk" id="vinyl-disk">
+                                <div class="vinyl-center"></div>
+                            </div>
+                        </div>
+
+                        <div class="drum-machine" id="drum-machine">
+                            <div class="pad" data-sound="kick"></div>
+                            <div class="pad" data-sound="snare"></div>
+                            <div class="pad" data-sound="clap"></div>
+                            <div class="pad" data-sound="hihat"></div>
+                            <div class="pad" data-sound="perc"></div>
+                            <div class="pad" data-sound="tom"></div>
+                            <div class="pad" data-sound="crash"></div>
+                            <div class="pad" data-sound="rim"></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="player-container">
@@ -457,6 +609,181 @@
             nowPlaying.innerHTML = translations[currentLang][trackKey];
         }
 
+        // --- ЛОГИКА DJ КОНСОЛИ (СКРЕТЧ, ТОНАРМ И ДРАМЫ) ---
+        const audioEl = document.getElementById('main-audio');
+        const vinylDiskEl = document.getElementById('vinyl-disk');
+        const vinylContainerEl = document.getElementById('vinyl-container');
+
+        let isPlaying = false;
+        let isDragging = false;
+        let currentRotation = 0;
+        let startAngle = 0;
+        let center = { x: 0, y: 0 };
+
+        // Авто-прокрутка
+        function spinLoop() {
+            if (isPlaying && !isDragging) {
+                currentRotation += 0.4; 
+                vinylDiskEl.style.transform = `rotate(${currentRotation}deg)`;
+            }
+            requestAnimationFrame(spinLoop);
+        }
+        spinLoop(); 
+
+        // Синхронизация с плеером (Тонарм и вращение)
+        audioEl.addEventListener('play', () => { 
+            isPlaying = true; 
+            vinylContainerEl.classList.add('playing'); // Опускаем тонарм
+        });
+        audioEl.addEventListener('pause', () => { 
+            isPlaying = false; 
+            vinylContainerEl.classList.remove('playing'); // Поднимаем тонарм
+        });
+        audioEl.addEventListener('ended', () => { 
+            isPlaying = false; 
+            vinylContainerEl.classList.remove('playing');
+        });
+
+        // Скретч (Scratch) логика
+        function updateCenter() {
+            const rect = vinylDiskEl.getBoundingClientRect();
+            center = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+        }
+        function getAngle(x, y) {
+            return Math.atan2(y - center.y, x - center.x) * (180 / Math.PI);
+        }
+        function startDrag(e) {
+            isDragging = true;
+            updateCenter();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            startAngle = getAngle(clientX, clientY) - currentRotation;
+            if (e.type === 'touchstart') e.preventDefault(); // Запрет скролла
+        }
+        function onDrag(e) {
+            if (!isDragging) return;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            const angle = getAngle(clientX, clientY);
+            const previousRotation = currentRotation;
+            currentRotation = angle - startAngle;
+            vinylDiskEl.style.transform = `rotate(${currentRotation}deg)`;
+            if (audioEl.duration && !isNaN(audioEl.duration)) {
+                const delta = currentRotation - previousRotation;
+                audioEl.currentTime += delta * 0.015; 
+            }
+            if (e.type === 'touchmove') e.preventDefault();
+        }
+        function endDrag() { isDragging = false; }
+
+        vinylDiskEl.addEventListener('mousedown', startDrag);
+        window.addEventListener('mousemove', onDrag);
+        window.addEventListener('mouseup', endDrag);
+        vinylDiskEl.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('touchmove', onDrag, { passive: false });
+        window.addEventListener('touchend', endDrag);
+
+
+        // --- ИНТЕРАКТИВНАЯ ДРАМ-МАШИНА (СИНТЕЗ ЗВУКА) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Функция генерации звуков (без использования файлов)
+        function playSynthesizedSound(soundType) {
+            // Создаем узлы
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            const now = audioCtx.currentTime;
+            
+            switch(soundType) {
+                case 'kick': // Синусоида с быстрым спадом частоты
+                    osc.frequency.setValueAtTime(150, now);
+                    osc.frequency.exponentialRampToValueAtTime(0.01, now + 0.15);
+                    gainNode.gain.setValueAtTime(1, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                    break;
+                case 'snare': // Шум + синусоида
+                    const noise = audioCtx.createBufferSource();
+                    const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.1, audioCtx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+                    noise.buffer = buffer;
+                    const noiseFilter = audioCtx.createBiquadFilter();
+                    noiseFilter.type = 'highpass'; noiseFilter.frequency.value = 1000;
+                    const noiseGain = audioCtx.createGain();
+                    noiseGain.gain.setValueAtTime(0.5, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(audioCtx.destination);
+                    noise.start(now); noise.stop(now + 0.15);
+                    
+                    osc.frequency.setValueAtTime(250, now);
+                    gainNode.gain.setValueAtTime(0.3, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+                    break;
+                case 'hihat': // Белый шум через фильтр
+                    const hn = audioCtx.createBufferSource();
+                    const hb = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.05, audioCtx.sampleRate);
+                    const hd = hb.getChannelData(0);
+                    for (let i = 0; i < hd.length; i++) hd[i] = Math.random() * 2 - 1;
+                    hn.buffer = hb;
+                    const hf = audioCtx.createBiquadFilter();
+                    hf.type = 'highpass'; hf.frequency.value = 7000;
+                    const hg = audioCtx.createGain();
+                    hg.gain.setValueAtTime(0.2, now);
+                    hg.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                    hn.connect(hf); hf.connect(hg); hg.connect(audioCtx.destination);
+                    hn.start(now); hn.stop(now + 0.05);
+                    break;
+                case 'clap': // Несколько отрывистых шумов
+                    for(let i=0; i<3; i++) {
+                        const cn = audioCtx.createBufferSource();
+                        const cb = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.1, audioCtx.sampleRate);
+                        const cd = cb.getChannelData(0);
+                        for(let j=0; j<cd.length; j++) cd[j] = Math.random()*2-1;
+                        cn.buffer = cb;
+                        const cf = audioCtx.createBiquadFilter(); cf.type='bandpass'; cf.frequency.value=1200;
+                        const cg = audioCtx.createGain();
+                        const burstTime = now + i*0.01;
+                        cg.gain.setValueAtTime(0.3, burstTime);
+                        cg.gain.exponentialRampToValueAtTime(0.001, burstTime + 0.08);
+                        cn.connect(cf); cf.connect(cg); cg.connect(audioCtx.destination);
+                        cn.start(burstTime); cn.stop(burstTime + 0.08);
+                    }
+                    break;
+                default: // Простой "пик" для остальных
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(soundType === 'tom' ? 100 : soundType === 'rim' ? 800 : 400, now);
+                    gainNode.gain.setValueAtTime(0.3, now); gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                    osc.start(now); osc.stop(now + 0.1);
+            }
+        }
+
+        // Обработка кликов по пэдам
+        const pads = document.querySelectorAll('.pad');
+        pads.forEach(pad => {
+            const playAndHighlight = (e) => {
+                if (e.type === 'touchstart') e.preventDefault();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const sound = pad.getAttribute('data-sound');
+                playSynthesizedSound(sound);
+                
+                // Визуальный эффект
+                pad.classList.add('hit');
+                setTimeout(() => pad.classList.remove('hit'), 100);
+            };
+            
+            pad.addEventListener('mousedown', playAndHighlight);
+            pad.addEventListener('touchstart', playAndHighlight, {passive: false});
+        });
+        // ----------------------------------------------------
+
+
+        // Звуки навигации и частицы (старая логика)
         const hoverSound = new Audio('hover.mp3'); 
         hoverSound.volume = 0.3; 
 
