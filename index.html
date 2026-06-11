@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23000000'/><text x='50' y='54' fill='%23ffffff' font-family='sans-serif' font-size='42' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>HB</text></svg>" type="image/svg+xml">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23000000'/><text x='50' y='54' fill='%23ffffff' font-family='sans-serif' font-size='42' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>HB</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght=200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --glass-bg: rgba(20, 22, 35, 0.4); 
@@ -188,6 +188,7 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 400;
         }
 
+        /* --- DJ КОНСОЛЬ (ПЛАСТИНКА И ДРАМ-МАШИНА) --- */
         .dj-console {
             display: flex; align-items: center; gap: 30px; background: rgba(0,0,0,0.2); 
             padding: 30px; border-radius: 24px; border: 1px solid var(--glass-border);
@@ -306,99 +307,74 @@
         .licensing-block p:last-child { margin-bottom: 0; }
         .copyright { color: rgba(255, 255, 255, 0.3); font-size: 0.85rem; margin: 0; letter-spacing: 2px; font-weight: 300; }
         
-        /* --- ИСПРАВЛЕННЫЙ И УПЛОТНЕННЫЙ АДАПТИВ ДЛЯ МОБИЛЬНЫХ --- */
+        /* --- АДАПТИВ --- */
         @media (max-width: 1024px) {
-            .showcase-section { flex-direction: column; align-items: center; padding: 30px 15px; }
+            .showcase-section { flex-direction: column; align-items: center; padding: 40px 20px; }
             .showcase-info, .player-container { width: 100%; max-width: 600px; text-align: center; align-items: center; }
-            .dj-console { flex-direction: column; gap: 20px; padding: 20px; align-items: center; justify-content: center; }
+            .dj-console { flex-direction: column; gap: 30px; padding: 25px; align-items: center; justify-content: center; }
             .drum-machine { width: 100%; max-width: 380px; grid-template-columns: repeat(4, 1fr); gap: 12px; }
             .tonearm { right: 10px; top: -5px; width: 100px; }
         }
 
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; padding: 10px 0; gap: 8px; }
-            .nav-links { gap: 12px; font-size: 0.72rem; flex-wrap: wrap; justify-content: center; padding: 0 5px; }
-            .lang-switch { position: relative; right: 0; margin-top: 2px; justify-content: center; }
+            .navbar { flex-direction: column; padding: 15px 0; gap: 15px; }
+            .nav-links { gap: 15px; font-size: 0.75rem; flex-wrap: wrap; justify-content: center; padding: 0 10px; }
+            .lang-switch { position: relative; right: 0; margin-top: 5px; justify-content: center; }
             
-            /* Ультра-компактные дистанции */
-            .container { padding: 85px 10px 20px; }
-            .hero { padding: 5px 0 20px; }
-            .logo-native { max-width: 70%; margin-bottom: 12px; }
-            .hero h1 { font-size: 0.95rem; letter-spacing: 3px; animation-name: none; opacity: 1; margin-bottom: 8px; }
-            .hero p.subtitle { font-size: 0.8rem; animation-name: none; opacity: 1; padding: 0 5px; line-height: 1.4; }
+            .container { padding: 110px 15px 40px; }
+            .hero { padding: 10px 0 40px; }
+            .logo-native { max-width: 80%; margin-bottom: 20px; }
+            .hero h1 { font-size: 1rem; letter-spacing: 4px; animation-name: none; opacity: 1; }
+            .hero p.subtitle { font-size: 0.85rem; animation-name: none; opacity: 1; padding: 0 10px; line-height: 1.5; }
             
-            .section-header { font-size: 1.6rem; margin-bottom: 15px; }
-            .about-text { font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; text-align: center; padding: 0 5px; }
-            .intro-video { margin-bottom: 25px; border-radius: 12px; opacity: 0.3; }
+            .section-header { font-size: 1.8rem; margin-bottom: 25px; }
+            .about-text { font-size: 0.95rem; margin-bottom: 40px; line-height: 1.6; text-align: center; padding: 0 10px; }
+            .intro-video { margin-bottom: 40px; border-radius: 16px; mix-blend-mode: screen; opacity: 0.3; }
             
-            /* Сетка дивизионов */
-            .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 30px; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 40px; }
+            .card { padding: 20px 10px; border-radius: 16px; }
+            .card img { width: 70px; height: 70px; margin-bottom: 15px; }
+            .card h3 { font-size: 0.85rem; letter-spacing: 1px; }
             
-            /* Стили для "Магнитной" анимации при скролле */
-            .card { 
-                padding: 15px 8px; 
-                border-radius: 14px; 
-                transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s, border-color 0.4s, box-shadow 0.4s;
-            }
-            .card img { width: 65px; height: 65px; margin-bottom: 10px; transition: all 0.4s ease; }
-            .card h3 { font-size: 0.8rem; letter-spacing: 0.5px; transition: all 0.4s ease; }
+            .vinyl-container { width: 200px; height: 200px; }
+            .vinyl-center { width: 60px; height: 60px; }
             
-            /* Класс магнитной активации (управляется JS через IntersectionObserver) */
-            .card.magnetic-active {
-                background: rgba(255, 255, 255, 0.08) !important;
-                border-color: var(--accent) !important;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 25px rgba(199, 161, 122, 0.6) !important;
-                transform: scale(1.04) translateY(-2px) !important;
-            }
-            .card.magnetic-active img {
-                filter: grayscale(0%) opacity(1) !important;
-                border-color: var(--accent) !important;
-                transform: scale(1.05);
-            }
-            .card.magnetic-active h3 {
-                color: var(--accent) !important;
-                text-shadow: 0 0 8px var(--accent);
-            }
-            
-            .vinyl-container { width: 180px; height: 180px; }
-            .vinyl-center { width: 55px; height: 55px; }
-            
-            .footer { padding: 20px 0; }
-            .contact-btn { padding: 12px 30px; font-size: 0.8rem; margin-bottom: 25px; }
-            .licensing-block { padding: 15px 10px; margin: 0 0 20px 0; border-radius: 10px; }
-            .licensing-block h4 { font-size: 0.95rem; margin-bottom: 10px; }
-            .licensing-block p { font-size: 0.8rem; line-height: 1.5; margin-bottom: 8px; }
+            .footer { padding: 30px 0; }
+            .contact-btn { padding: 14px 35px; font-size: 0.85rem; margin-bottom: 40px; }
+            .licensing-block { padding: 20px 15px; margin: 0 0 30px 0; border-radius: 12px; }
+            .licensing-block h4 { font-size: 1rem; }
+            .licensing-block p { font-size: 0.85rem; line-height: 1.6; }
 
-            /* Плейлист */
             .playlist {
                 scroll-snap-type: none;
-                padding-top: 5px;
-                padding-bottom: 5px;
-                max-height: 230px;
-                gap: 5px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                max-height: 250px;
             }
             .track-btn {
-                margin-bottom: 4px;
-                padding: 8px 12px;
-                font-size: 0.88rem;
+                margin-bottom: 8px;
+                padding: 10px 15px;
+                transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             }
             .track-btn.active {
-                transform: scale(1.01);
+                transform: scale(1.02);
                 background: rgba(199, 161, 122, 0.15);
                 border-color: var(--accent);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             }
         }
         
         @media (max-width: 480px) {
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } /* Сетка в 2 аккуратные колонки на совсем маленьких экранах */
-            .vinyl-container { width: 150px; height: 150px; margin-bottom: 5px; }
-            .vinyl-center { width: 45px; height: 45px; }
-            .vinyl-center::before { font-size: 0.9rem; }
-            .tonearm { display: block; width: 75px; right: -5px; top: -12px; }
-            .drum-machine { width: 100%; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-            .pad { padding: 4px; border-radius: 6px; }
-            .pad::after { font-size: 0.5rem; }
-            .dj-console { padding: 12px; gap: 15px; }
+            .grid { grid-template-columns: 1fr; }
+            .vinyl-container { width: 170px; height: 170px; margin-bottom: 10px; }
+            .vinyl-center { width: 50px; height: 50px; }
+            .vinyl-center::before { font-size: 1rem; }
+            .tonearm { display: block; width: 80px; right: -5px; top: -12px; }
+            .tonearm::before { width: 20px; height: 16px; }
+            .drum-machine { width: 100%; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+            .pad { padding: 5px; border-radius: 8px; }
+            .pad::after { font-size: 0.55rem; }
+            .dj-console { padding: 15px; gap: 20px; }
         }
     </style>
 </head>
@@ -553,7 +529,7 @@
                 nav_about: "О нас", nav_projects: "Направления", nav_licensing: "Лицензии", nav_showcase: "Витрина", nav_contact: "Контакты",
                 hero_title: "Искусство Звуковой Атмосферы", hero_subtitle: "Озвучиваем моменты вашей жизни. От глубокого фокуса до чистой энергии.",
                 about_h2_1: "Звуковая", about_h2_2: "Архитектура",
-                about_p: "Добро пожаловать в <strong>HitBit Studio</strong>, независимый музыкальный лейбл, где звук обретает смысл. Мы верим, что музыку нужно не просто слушать — её нужно проживать. Наши тщательно под заголовок направления созданы, чтобы стать идеальным фоном для любой сферы современной жизни.<br><br>Ищете ли вы глубокую концентрацию для работы, динамичный ритм для тренировки или мягкую колыбельную для малыша — мы обеспечиваем безупречное качество звука. Мы создаем атмосферу, которая превращает повседневность в кино.",
+                about_p: "Добро пожаловать в <strong>HitBit Studio</strong>, независимый музыкальный лейбл, где звук обретает смысл. Мы верим, что музыку нужно не просто слушать — её нужно проживать. Наши тщательно подобранные направления созданы, чтобы стать идеальным фоном для любой сферы современной жизни.<br><br>Ищете ли вы глубокую концентрацию для работы, динамичный ритм для тренировки или мягкую колыбельную для малыша — мы обеспечиваем безупречное качество звука. Мы создаем атмосферу, которая превращает повседневность в кино.",
                 projects_h2_1: "Наши", projects_h2_2: "Направления",
                 showcase_h2_1: "Избранное", showcase_h2_2: "Звучание", 
                 demo_label: "Демо",
@@ -578,6 +554,7 @@
             document.getElementById('btn-' + lang).classList.add('active');
         }
 
+        // Обновленная функция воспроизведения (с возможностью паузы при повторном клике)
         function playTrack(btnElement) {
             const audio = document.getElementById('main-audio');
             const nowPlaying = document.getElementById('now-playing');
@@ -791,11 +768,12 @@
         function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, width, height); particles.forEach(p => p.update()); }
         init(); animate();
 
-        // --- МОБИЛЬНЫЙ СКРОЛЛ-ПИКЕР ---
+        // --- МОБИЛЬНЫЙ СКРОЛЛ-ПИКЕР (Отключен для улучшения интерфейса) ---
         function initMobileScrollPicker() {
             const playlist = document.querySelector('.playlist');
             const tracks = document.querySelectorAll('.track-btn');
             
+            // Отключаем старый observer
             if (typeof scrollObserver !== 'undefined' && scrollObserver) {
                 scrollObserver.disconnect();
             }
@@ -807,51 +785,8 @@
             });
         }
 
-        // --- НОВАЯ ФУНКЦИЯ: МАГНИТНАЯ ПОДСВЕТКА С ВИБРАЦИЕЙ ДЛЯ КАРТОЧЕК ---
-        function initMobileMagneticCards() {
-            if (window.innerWidth > 768) return; // Работает только на мобильной версии
-            
-            const cards = document.querySelectorAll('.card');
-            
-            // Настройка зоны фиксации: отслеживаем, когда карточка пересекает центральную полосу экрана
-            const options = {
-                root: null,
-                rootMargin: '-42% 0px -42% 0px', 
-                threshold: 0.1
-            };
-
-            const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (!entry.target.classList.contains('magnetic-active')) {
-                            cards.forEach(c => c.classList.remove('magnetic-active'));
-                            
-                            // Активируем подсветку
-                            entry.target.classList.add('magnetic-active');
-                            
-                            // Мягкий тактильный клик (вибрация) при фиксации карточки по центру
-                            if (navigator.vibrate) {
-                                navigator.vibrate(12); 
-                            }
-                        }
-                    } else {
-                        entry.target.classList.remove('magnetic-active');
-                    }
-                });
-            }, options);
-
-            cards.forEach(card => cardObserver.observe(card));
-        }
-
-        window.addEventListener('load', () => {
-            initMobileScrollPicker();
-            initMobileMagneticCards();
-        });
-        
-        window.addEventListener('resize', () => {
-            initMobileScrollPicker();
-            initMobileMagneticCards();
-        });
+        window.addEventListener('load', initMobileScrollPicker);
+        window.addEventListener('resize', initMobileScrollPicker);
     </script>
 </body>
 </html>
