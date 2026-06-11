@@ -320,40 +320,44 @@
             .navbar { flex-direction: column; padding: 15px 0; gap: 15px; }
             .nav-links { gap: 15px; font-size: 0.75rem; flex-wrap: wrap; justify-content: center; padding: 0 10px; }
             .lang-switch { position: relative; right: 0; margin-top: 5px; justify-content: center; }
-            .container { padding: 140px 15px 40px; }
-            .hero { padding: 20px 0 60px; }
-            .logo-native { max-width: 90%; margin-bottom: 20px; }
+            
+            .container { padding: 110px 15px 40px; }
+            .hero { padding: 10px 0 40px; }
+            .logo-native { max-width: 80%; margin-bottom: 20px; }
             .hero h1 { font-size: 1rem; letter-spacing: 4px; animation-name: none; opacity: 1; }
             .hero p.subtitle { font-size: 0.85rem; animation-name: none; opacity: 1; padding: 0 10px; line-height: 1.5; }
-            .section-header { font-size: 2rem; margin-bottom: 30px; }
-            .about-text { font-size: 1rem; margin-bottom: 60px; line-height: 1.8; text-align: center; padding: 0 10px; }
+            
+            .section-header { font-size: 1.8rem; margin-bottom: 25px; }
+            .about-text { font-size: 0.95rem; margin-bottom: 40px; line-height: 1.6; text-align: center; padding: 0 10px; }
             .intro-video { margin-bottom: 40px; border-radius: 16px; mix-blend-mode: screen; opacity: 0.3; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 60px; }
-            .card { padding: 25px 15px; border-radius: 16px; }
-            .card img { width: 80px; height: 80px; margin-bottom: 15px; }
-            .card h3 { font-size: 0.9rem; letter-spacing: 1px; }
+            
+            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 40px; }
+            .card { padding: 20px 10px; border-radius: 16px; }
+            .card img { width: 70px; height: 70px; margin-bottom: 15px; }
+            .card h3 { font-size: 0.85rem; letter-spacing: 1px; }
             
             .vinyl-container { width: 200px; height: 200px; }
             .vinyl-center { width: 60px; height: 60px; }
             
-            .footer { padding: 30px 0 30px; }
+            .footer { padding: 30px 0; }
             .contact-btn { padding: 14px 35px; font-size: 0.85rem; margin-bottom: 40px; }
-            .licensing-block { padding: 25px 20px; margin: 0 0 30px 0; border-radius: 12px; }
+            .licensing-block { padding: 20px 15px; margin: 0 0 30px 0; border-radius: 12px; }
             .licensing-block h4 { font-size: 1rem; }
             .licensing-block p { font-size: 0.85rem; line-height: 1.6; }
 
-            /* Магнитный скролл-пикер для плейлиста */
             .playlist {
-                scroll-snap-type: y mandatory;
-                padding-top: 130px;
-                padding-bottom: 130px;
+                scroll-snap-type: none;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                max-height: 250px;
             }
             .track-btn {
-                scroll-snap-align: center;
+                margin-bottom: 8px;
+                padding: 10px 15px;
                 transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             }
             .track-btn.active {
-                transform: scale(1.05);
+                transform: scale(1.02);
                 background: rgba(199, 161, 122, 0.15);
                 border-color: var(--accent);
                 box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -372,28 +376,6 @@
             .pad::after { font-size: 0.55rem; }
             .dj-console { padding: 15px; gap: 20px; }
         }
-
-        /* --- ЭФФЕКТ ДЛЯ АКТИВНОЙ КАРТОЧКИ АРТИСТА ПРИ СКРОЛЛЕ НА МОБИЛЬНОМ --- */
-@media (max-width: 768px) {
-    .card.card-active {
-        transform: scale(1.05) !important;
-        border-color: var(--accent);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 30px var(--accent);
-        background: rgba(255, 255, 255, 0.04);
-    }
-    
-    .card.card-active img {
-        transform: scale(1.08) rotate(5deg);
-        border-color: var(--accent);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.8), 0 0 30px var(--accent);
-        filter: grayscale(0%) opacity(1);
-    }
-    
-    .card.card-active h3 {
-        color: var(--accent);
-        text-shadow: 0 0 10px var(--accent);
-    }
-}
     </style>
 </head>
 <body>
@@ -572,14 +554,30 @@
             document.getElementById('btn-' + lang).classList.add('active');
         }
 
+        // Обновленная функция воспроизведения (с возможностью паузы при повторном клике)
         function playTrack(btnElement) {
             const audio = document.getElementById('main-audio');
             const nowPlaying = document.getElementById('now-playing');
-            
+            const newSrc = btnElement.getAttribute('data-src');
+
+            const currentSrcParts = decodeURIComponent(audio.src).split('/');
+            const currentSrc = currentSrcParts[currentSrcParts.length - 1];
+
+            if (currentSrc === newSrc || btnElement.classList.contains('active')) {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                document.querySelectorAll('.track-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+                return;
+            }
+
             document.querySelectorAll('.track-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
             
-            audio.src = btnElement.getAttribute('data-src');
+            audio.src = newSrc;
             audio.play();
             
             const trackKey = btnElement.getAttribute('data-track');
@@ -770,66 +768,21 @@
         function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, width, height); particles.forEach(p => p.update()); }
         init(); animate();
 
-        // --- МОБИЛЬНЫЙ СКРОЛЛ-ПИКЕР ---
-        let scrollObserver;
-        
-        function playTickSound() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
-            osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.03);
-            
-            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
-            
-            osc.start(audioCtx.currentTime);
-            osc.stop(audioCtx.currentTime + 0.03);
-        }
-
+        // --- МОБИЛЬНЫЙ СКРОЛЛ-ПИКЕР (Отключен для улучшения интерфейса) ---
         function initMobileScrollPicker() {
             const playlist = document.querySelector('.playlist');
             const tracks = document.querySelectorAll('.track-btn');
             
-            if (window.innerWidth <= 768) {
-                const options = {
-                    root: playlist,
-                    rootMargin: '-49% 0px -49% 0px', 
-                    threshold: 0
-                };
-
-                scrollObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            if (entry.target.classList.contains('active')) return;
-
-                            tracks.forEach(btn => btn.classList.remove('active'));
-                            entry.target.classList.add('active');
-                            
-                            playTickSound();
-                            
-                            const nowPlaying = document.getElementById('now-playing');
-                            const trackKey = entry.target.getAttribute('data-track');
-                            nowPlaying.setAttribute('data-i18n', trackKey);
-                            const currentLang = document.querySelector('.lang-btn.active').id.replace('btn-', '');
-                            nowPlaying.innerHTML = translations[currentLang][trackKey];
-                        }
-                    });
-                }, options);
-
-                tracks.forEach(track => scrollObserver.observe(track));
-            } else {
-                if (scrollObserver) scrollObserver.disconnect();
-                playlist.style.paddingTop = '0';
-                playlist.style.paddingBottom = '0';
-                tracks.forEach(t => {
-                    t.style.transform = 'none';
-                });
+            // Отключаем старый observer
+            if (typeof scrollObserver !== 'undefined' && scrollObserver) {
+                scrollObserver.disconnect();
             }
+            
+            playlist.style.paddingTop = '10px';
+            playlist.style.paddingBottom = '10px';
+            tracks.forEach(t => {
+                t.style.transform = 'none';
+            });
         }
 
         window.addEventListener('load', initMobileScrollPicker);
