@@ -174,7 +174,6 @@
             backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
 
-        /* Навигация витрины (текст и пульты) */
         .showcase-info { display: flex; flex-direction: column; align-items: flex-start; flex: 1; min-width: 300px; }
         .showcase-info h2 { margin: 0 0 10px 0; font-size: 2.2rem; font-weight: 200; letter-spacing: 1px; display: flex; align-items: center; gap: 15px; }
 
@@ -197,7 +196,6 @@
             position: relative;
         }
 
-        /* Прокачанная Пластинка */
         .vinyl-container {
             position: relative; width: 220px; height: 220px; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
@@ -205,66 +203,50 @@
         }
         .vinyl-disk {
             width: 100%; height: 100%; border-radius: 50%;
-            /* ДОБАВЛЕНО ИЗОБРАЖЕНИЕ: Укажите путь к вашей картинке винила */
             background-image: url('vinyl-record.png'); 
             background-size: cover;
             background-position: center;
-            background-color: #111; /* Резервный фон, если картинки еще нет */
+            background-color: #111;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 30px rgba(199, 161, 122, 0.15);
             position: relative; cursor: grab; touch-action: none;
             transform-origin: center center; will-change: transform;
         }
         .vinyl-disk:active { cursor: grabbing; }
         
-        /* Глянец поверх картинки (опционально) */
         .vinyl-disk::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             border-radius: 50%; background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.06) 55%, transparent 60%);
             pointer-events: none;
         }
         
-        /* Центр (Яблоко винила). Если на вашей картинке уже есть красивый центр, этот блок можно скрыть (display: none;) */
         .vinyl-center {
             position: absolute; width: 70px; height: 70px; background: #12131a;
             border-radius: 50%; border: 3px solid var(--accent); display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 20px rgba(199, 161, 122, 0.5), inset 0 0 15px rgba(0,0,0,0.8);
             pointer-events: none; 
         }
-        /* Текст на яблоке (лого) */
-        .vinyl-center::before {
-            content: 'HB'; font-weight: 600; color: var(--accent); font-size: 1.4rem; letter-spacing: -1px;
-        }
-        /* Шпиндель */
+        .vinyl-center::before { content: 'HB'; font-weight: 600; color: var(--accent); font-size: 1.4rem; letter-spacing: -1px; }
         .vinyl-center::after {
             content: ''; position: absolute; width: 8px; height: 8px; background: #090a0f; border-radius: 50%;
             box-shadow: inset 0 2px 2px rgba(255,255,255,0.2);
         }
 
-        /* Тонарм (Needle) */
         .tonearm {
             position: absolute; top: -10px; right: -15px; width: 120px; height: 10px;
             background: #222; border-radius: 5px; transform-origin: 90% 50%;
-            transform: rotate(60deg); /* Поднят по умолчанию */
+            transform: rotate(60deg);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 5px 10px rgba(0,0,0,0.5); z-index: 2; pointer-events: none;
             border: 1px solid #333;
         }
-        /* Головка звукоснимателя */
         .tonearm::before {
             content: ''; position: absolute; left: 0; top: -5px; width: 25px; height: 20px;
             background: #111; border-radius: 3px; border: 1px solid var(--accent);
             box-shadow: 0 0 10px rgba(199, 161, 122, 0.3);
         }
-        /* Игла */
-        .tonearm::after {
-            content: ''; position: absolute; left: 5px; top: 15px; width: 2px; height: 8px;
-            background: #aaa; border-radius: 1px;
-        }
-        /* Состояние: когда тонарм опущен */
+        .tonearm::after { content: ''; position: absolute; left: 5px; top: 15px; width: 2px; height: 8px; background: #aaa; border-radius: 1px; }
         .vinyl-container.playing .tonearm { transform: rotate(15deg); }
 
-
-        /* Драм-машина (Pads) */
         .drum-machine {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;
             flex-grow: 1; user-select: none; -webkit-user-select: none;
@@ -278,70 +260,37 @@
             display: flex; align-items: flex-end; justify-content: flex-start; padding: 10px;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
         }
-        /* Название звука */
         .pad::after {
             content: attr(data-sound); color: rgba(255,255,255,0.3);
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 300;
         }
-        /* Эффект нажатия (свечение) */
         .pad:active, .pad.hit {
-            background: rgba(199, 161, 122, 0.2);
-            border-color: var(--accent);
+            background: rgba(199, 161, 122, 0.2); border-color: var(--accent);
             box-shadow: 0 0 25px var(--accent), inset 0 0 10px rgba(199, 161, 122, 0.5);
             transform: scale(0.96);
         }
         .pad:active::after, .pad.hit::after { color: var(--accent); }
-        /* ---------------------------------- */
 
         .player-container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0; }
         .custom-audio audio { width: 100%; filter: invert(90%) hue-rotate(180deg) drop-shadow(0 5px 15px rgba(0,0,0,0.5)); border-radius: 40px; outline: none; }
         
-        .playlist {
-            max-height: 280px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding-right: 10px;
-        }
-        
+        .playlist { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 10px; }
         .playlist::-webkit-scrollbar { width: 5px; }
         .playlist::-webkit-scrollbar-thumb { background: rgba(199, 161, 122, 0.3); border-radius: 10px; }
         .playlist::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
         .track-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-            padding: 12px 20px;
-            border-radius: 12px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted); padding: 12px 20px; border-radius: 12px; text-align: left;
+            cursor: pointer; transition: all 0.3s ease; font-family: 'Outfit', sans-serif; font-size: 0.95rem;
+            display: flex; align-items: center;
         }
-
-        .track-btn::before {
-            content: '▶';
-            font-size: 0.7rem;
-            margin-right: 15px;
-            opacity: 0.5;
-            transition: 0.3s;
-        }
-
+        .track-btn::before { content: '▶'; font-size: 0.7rem; margin-right: 15px; opacity: 0.5; transition: 0.3s; }
         .track-btn:hover { background: rgba(199, 161, 122, 0.1); color: var(--text-main); border-color: rgba(199, 161, 122, 0.3); }
         .track-btn.active { background: rgba(199, 161, 122, 0.15); border-color: var(--accent); color: var(--accent); }
         .track-btn.active::before { content: '🎶'; opacity: 1; }
 
-        .footer { 
-            text-align: center; 
-            padding: 40px 0 50px; 
-            border-top: 1px solid var(--glass-border); 
-            position: relative; 
-        }
+        .footer { text-align: center; padding: 40px 0 50px; border-top: 1px solid var(--glass-border); position: relative; }
         .contact-btn {
             display: inline-block; padding: 16px 45px; background: transparent; color: var(--text-main);
             border: 1px solid var(--accent); border-radius: 40px; text-decoration: none; font-size: 0.95rem;
@@ -358,7 +307,7 @@
         .licensing-block p:last-child { margin-bottom: 0; }
         .copyright { color: rgba(255, 255, 255, 0.3); font-size: 0.85rem; margin: 0; letter-spacing: 2px; font-weight: 300; }
         
-        /* --- ОБНОВЛЕННЫЙ АДАПТИВ ДЛЯ DJ ПУЛЬТА И МОБИЛЬНЫХ УСТРОЙСТВ --- */
+        /* --- АДАПТИВ --- */
         @media (max-width: 1024px) {
             .showcase-section { flex-direction: column; align-items: center; padding: 40px 20px; }
             .showcase-info, .player-container { width: 100%; max-width: 600px; text-align: center; align-items: center; }
@@ -384,7 +333,6 @@
             .card img { width: 80px; height: 80px; margin-bottom: 15px; }
             .card h3 { font-size: 0.9rem; letter-spacing: 1px; }
             
-            /* Корректировка винила для планшетов */
             .vinyl-container { width: 200px; height: 200px; }
             .vinyl-center { width: 60px; height: 60px; }
             
@@ -393,27 +341,59 @@
             .licensing-block { padding: 25px 20px; margin: 0 0 30px 0; border-radius: 12px; }
             .licensing-block h4 { font-size: 1rem; }
             .licensing-block p { font-size: 0.85rem; line-height: 1.6; }
+
+            /* Магнитный скролл-пикер для плейлиста */
+            .playlist {
+                scroll-snap-type: y mandatory;
+                padding-top: 130px;
+                padding-bottom: 130px;
+            }
+            .track-btn {
+                scroll-snap-align: center;
+                transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            }
+            .track-btn.active {
+                transform: scale(1.05);
+                background: rgba(199, 161, 122, 0.15);
+                border-color: var(--accent);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
         }
         
         @media (max-width: 480px) {
             .grid { grid-template-columns: 1fr; }
-            
-            /* Полная адаптация консоли под маленькие экраны (iPhone и др.) */
             .vinyl-container { width: 170px; height: 170px; margin-bottom: 10px; }
             .vinyl-center { width: 50px; height: 50px; }
             .vinyl-center::before { font-size: 1rem; }
-            
-            /* Тонарм теперь не исчезает, а аккуратно подстраивается */
             .tonearm { display: block; width: 80px; right: -5px; top: -12px; }
             .tonearm::before { width: 20px; height: 16px; }
-            
-            /* Драм-машина: компактная сетка 4 в ряд */
             .drum-machine { width: 100%; grid-template-columns: repeat(4, 1fr); gap: 8px; }
             .pad { padding: 5px; border-radius: 8px; }
             .pad::after { font-size: 0.55rem; }
-            
             .dj-console { padding: 15px; gap: 20px; }
         }
+
+        /* --- ЭФФЕКТ ДЛЯ АКТИВНОЙ КАРТОЧКИ АРТИСТА ПРИ СКРОЛЛЕ НА МОБИЛЬНОМ --- */
+@media (max-width: 768px) {
+    .card.card-active {
+        transform: scale(1.05) !important;
+        border-color: var(--accent);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 30px var(--accent);
+        background: rgba(255, 255, 255, 0.04);
+    }
+    
+    .card.card-active img {
+        transform: scale(1.08) rotate(5deg);
+        border-color: var(--accent);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.8), 0 0 30px var(--accent);
+        filter: grayscale(0%) opacity(1);
+    }
+    
+    .card.card-active h3 {
+        color: var(--accent);
+        text-shadow: 0 0 10px var(--accent);
+    }
+}
     </style>
 </head>
 <body>
@@ -609,7 +589,7 @@
             nowPlaying.innerHTML = translations[currentLang][trackKey];
         }
 
-        // --- ЛОГИКА DJ КОНСОЛИ (СКРЕТЧ, ТОНАРМ И ДРАМЫ) ---
+        // --- ЛОГИКА DJ КОНСОЛИ ---
         const audioEl = document.getElementById('main-audio');
         const vinylDiskEl = document.getElementById('vinyl-disk');
         const vinylContainerEl = document.getElementById('vinyl-container');
@@ -620,7 +600,6 @@
         let startAngle = 0;
         let center = { x: 0, y: 0 };
 
-        // Авто-прокрутка
         function spinLoop() {
             if (isPlaying && !isDragging) {
                 currentRotation += 0.4; 
@@ -630,35 +609,23 @@
         }
         spinLoop(); 
 
-        // Синхронизация с плеером (Тонарм и вращение)
-        audioEl.addEventListener('play', () => { 
-            isPlaying = true; 
-            vinylContainerEl.classList.add('playing'); // Опускаем тонарм
-        });
-        audioEl.addEventListener('pause', () => { 
-            isPlaying = false; 
-            vinylContainerEl.classList.remove('playing'); // Поднимаем тонарм
-        });
-        audioEl.addEventListener('ended', () => { 
-            isPlaying = false; 
-            vinylContainerEl.classList.remove('playing');
-        });
+        audioEl.addEventListener('play', () => { isPlaying = true; vinylContainerEl.classList.add('playing'); });
+        audioEl.addEventListener('pause', () => { isPlaying = false; vinylContainerEl.classList.remove('playing'); });
+        audioEl.addEventListener('ended', () => { isPlaying = false; vinylContainerEl.classList.remove('playing'); });
 
-        // Скретч (Scratch) логика
         function updateCenter() {
             const rect = vinylDiskEl.getBoundingClientRect();
             center = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
         }
-        function getAngle(x, y) {
-            return Math.atan2(y - center.y, x - center.x) * (180 / Math.PI);
-        }
+        function getAngle(x, y) { return Math.atan2(y - center.y, x - center.x) * (180 / Math.PI); }
+        
         function startDrag(e) {
             isDragging = true;
             updateCenter();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             startAngle = getAngle(clientX, clientY) - currentRotation;
-            if (e.type === 'touchstart') e.preventDefault(); // Запрет скролла
+            if (e.type === 'touchstart') e.preventDefault(); 
         }
         function onDrag(e) {
             if (!isDragging) return;
@@ -683,13 +650,10 @@
         window.addEventListener('touchmove', onDrag, { passive: false });
         window.addEventListener('touchend', endDrag);
 
-
-        // --- ИНТЕРАКТИВНАЯ ДРАМ-МАШИНА (СИНТЕЗ ЗВУКА) ---
+        // --- ДРАМ-МАШИНА ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
-        // Функция генерации звуков (без использования файлов)
         function playSynthesizedSound(soundType) {
-            // Создаем узлы
             const osc = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
             osc.connect(gainNode);
@@ -698,15 +662,14 @@
             const now = audioCtx.currentTime;
             
             switch(soundType) {
-                case 'kick': // Синусоида с быстрым спадом частоты
+                case 'kick': 
                     osc.frequency.setValueAtTime(150, now);
                     osc.frequency.exponentialRampToValueAtTime(0.01, now + 0.15);
                     gainNode.gain.setValueAtTime(1, now);
                     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-                    osc.start(now);
-                    osc.stop(now + 0.2);
+                    osc.start(now); osc.stop(now + 0.2);
                     break;
-                case 'snare': // Шум + синусоида
+                case 'snare': 
                     const noise = audioCtx.createBufferSource();
                     const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.1, audioCtx.sampleRate);
                     const data = buffer.getChannelData(0);
@@ -725,7 +688,7 @@
                     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
                     osc.start(now); osc.stop(now + 0.1);
                     break;
-                case 'hihat': // Белый шум через фильтр
+                case 'hihat': 
                     const hn = audioCtx.createBufferSource();
                     const hb = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.05, audioCtx.sampleRate);
                     const hd = hb.getChannelData(0);
@@ -739,7 +702,7 @@
                     hn.connect(hf); hf.connect(hg); hg.connect(audioCtx.destination);
                     hn.start(now); hn.stop(now + 0.05);
                     break;
-                case 'clap': // Несколько отрывистых шумов
+                case 'clap': 
                     for(let i=0; i<3; i++) {
                         const cn = audioCtx.createBufferSource();
                         const cb = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.1, audioCtx.sampleRate);
@@ -755,46 +718,26 @@
                         cn.start(burstTime); cn.stop(burstTime + 0.08);
                     }
                     break;
-                default: // Простой "пик" для остальных
+                default: 
                     osc.type = 'triangle'; osc.frequency.setValueAtTime(soundType === 'tom' ? 100 : soundType === 'rim' ? 800 : 400, now);
                     gainNode.gain.setValueAtTime(0.3, now); gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
                     osc.start(now); osc.stop(now + 0.1);
             }
         }
 
-        // Обработка кликов по пэдам
-        const pads = document.querySelectorAll('.pad');
-        pads.forEach(pad => {
+        document.querySelectorAll('.pad').forEach(pad => {
             const playAndHighlight = (e) => {
                 if (e.type === 'touchstart') e.preventDefault();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
-                
-                const sound = pad.getAttribute('data-sound');
-                playSynthesizedSound(sound);
-                
-                // Визуальный эффект
+                playSynthesizedSound(pad.getAttribute('data-sound'));
                 pad.classList.add('hit');
                 setTimeout(() => pad.classList.remove('hit'), 100);
             };
-            
             pad.addEventListener('mousedown', playAndHighlight);
             pad.addEventListener('touchstart', playAndHighlight, {passive: false});
         });
-        // ----------------------------------------------------
 
-
-        // Звуки навигации и частицы (старая логика)
-        const hoverSound = new Audio('hover.mp3'); 
-        hoverSound.volume = 0.3; 
-
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                hoverSound.currentTime = 0; 
-                hoverSound.play().catch(error => { });
-            });
-        });
-
+        // --- ЧАСТИЦЫ НА ФОНЕ ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -823,10 +766,74 @@
                 this.draw();
             }
         }
-
         function init() { particles = []; let numParticles = Math.floor(width / 15); for (let i = 0; i < numParticles; i++) particles.push(new Particle()); }
         function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, width, height); particles.forEach(p => p.update()); }
         init(); animate();
+
+        // --- МОБИЛЬНЫЙ СКРОЛЛ-ПИКЕР ---
+        let scrollObserver;
+        
+        function playTickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+            osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.03);
+            
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+            
+            osc.start(audioCtx.currentTime);
+            osc.stop(audioCtx.currentTime + 0.03);
+        }
+
+        function initMobileScrollPicker() {
+            const playlist = document.querySelector('.playlist');
+            const tracks = document.querySelectorAll('.track-btn');
+            
+            if (window.innerWidth <= 768) {
+                const options = {
+                    root: playlist,
+                    rootMargin: '-49% 0px -49% 0px', 
+                    threshold: 0
+                };
+
+                scrollObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (entry.target.classList.contains('active')) return;
+
+                            tracks.forEach(btn => btn.classList.remove('active'));
+                            entry.target.classList.add('active');
+                            
+                            playTickSound();
+                            
+                            const nowPlaying = document.getElementById('now-playing');
+                            const trackKey = entry.target.getAttribute('data-track');
+                            nowPlaying.setAttribute('data-i18n', trackKey);
+                            const currentLang = document.querySelector('.lang-btn.active').id.replace('btn-', '');
+                            nowPlaying.innerHTML = translations[currentLang][trackKey];
+                        }
+                    });
+                }, options);
+
+                tracks.forEach(track => scrollObserver.observe(track));
+            } else {
+                if (scrollObserver) scrollObserver.disconnect();
+                playlist.style.paddingTop = '0';
+                playlist.style.paddingBottom = '0';
+                tracks.forEach(t => {
+                    t.style.transform = 'none';
+                });
+            }
+        }
+
+        window.addEventListener('load', initMobileScrollPicker);
+        window.addEventListener('resize', initMobileScrollPicker);
     </script>
 </body>
 </html>
